@@ -22,6 +22,9 @@ app.get("/data", (req, res) => {
   res.send(profile_data);
 });
 
+app.get("*",(req,res)=>{
+  res.sendFile(__dirname + '/Error.html')
+})
 app.listen(5500, () => {
   console.log("server listening...");
 });
