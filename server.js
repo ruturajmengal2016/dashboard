@@ -1,3 +1,4 @@
+require("dotenv").config()
 const express = require("express");
 const XLSX = require("xlsx");
 const app = express();
@@ -25,6 +26,6 @@ app.get("/data", (req, res) => {
   res.send(profile_data);
 });
 
-app.listen(5500, () => {
+app.listen(process.env.PORT, () => {
   console.log("server listening...");
 });
