@@ -1,12 +1,12 @@
-require("dotenv").config()
+require("dotenv").config();
 const express = require("express");
 const XLSX = require("xlsx");
 const app = express();
 app.use(express.json());
 app.use((req, res, next) => {
-  res.header({"Access-Control-Allow-Origin": "*"});
+  res.header({ "Access-Control-Allow-Origin": "https://nobelium-dashboard.onrender.com" });
   next();
-}) 
+});
 const workbook = XLSX.readFile("./Excel/Nobelium - Leaderboard.xlsx");
 
 const worksheet = workbook.Sheets["Sheet1"];
