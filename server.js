@@ -4,7 +4,10 @@ const XLSX = require("xlsx");
 const app = express();
 app.use(express.json());
 app.use((req, res, next) => {
-  res.header({ "Access-Control-Allow-Origin": "https://nobelium-dashboard.onrender.com" });
+  res.header({
+    "Access-Control-Allow-Origin": "https://nobelium-dashboard.onrender.com",
+    "Access-Control-Allow-Origin": "*",
+  });
   next();
 });
 const workbook = XLSX.readFile("./Excel/Nobelium - Leaderboard.xlsx");
