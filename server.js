@@ -29,6 +29,20 @@ app.get("/data", (req, res) => {
   res.send(profile_data);
 });
 
+app.get("/user/:id", async (req, res) => {
+  try {
+    let userProfile;
+    for (let value of data) {
+      if (value["Roll No."] == req.params.id) {
+        userProfile = value;
+      }
+    }
+    res.send(userProfile);
+  } catch (error) {
+    throw new Error("User not Found");
+  }
+});
+
 app.listen(process.env.PORT, () => {
   console.log("server listening...");
 });
