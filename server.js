@@ -4,10 +4,11 @@ const fs = require("fs");
 const XLSX = require("xlsx");
 const app = express();
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use((req, res, next) => {
   res.header({
-    "Access-Control-Allow-Origin": "https://nobelium-dashboard.onrender.com", 
-    "Access-Control-Allow-Origin": "*", 
+    "Access-Control-Allow-Origin": "https://nobelium-dashboard.onrender.com",
+    "Access-Control-Allow-Origin": "*",
   });
   next();
 });
@@ -26,10 +27,10 @@ for (let value of data) {
   });
 }
 
-app.get("/users",(req,res)=>{
-  const data =JSON.parse(fs.readFileSync("./Database/data.json"))
-  res.send(data)
-})
+app.get("/users", (req, res) => {
+  const data = JSON.parse(fs.readFileSync("./Database/data.json"));
+  res.send(data);
+});
 
 app.get("/data", (req, res) => {
   res.send(profile_data);
@@ -56,7 +57,7 @@ app.post("/post", async (req, res) => {
     data.data.push(req.body);
     fs.writeFileSync("./Database/data.json", JSON.stringify(data, null, 2));
     res.status(201);
-    res.send("send successfully...")
+    res.send("send successfully...");
   } catch (error) {
     throw new Error(error);
   }
