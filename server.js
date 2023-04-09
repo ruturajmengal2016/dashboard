@@ -26,6 +26,11 @@ for (let value of data) {
   });
 }
 
+app.get("/users",(req,res)=>{
+  const data =JSON.parse(fs.readFileSync("./Database/data.json"))
+  res.send(data)
+})
+
 app.get("/data", (req, res) => {
   res.send(profile_data);
 });
