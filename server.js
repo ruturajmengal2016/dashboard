@@ -1,5 +1,6 @@
 require("dotenv").config();
 const express = require("express");
+const fs = require("fs");
 const XLSX = require("xlsx");
 const app = express();
 app.use(express.json());
@@ -44,8 +45,12 @@ app.get("/user/:id", async (req, res) => {
 
 app.post("/post", async (req, res) => {
   try {
+    const file = fs.readFileSync("./Database/data.json");
+    const data = JSON.parse(file);
+    data.data.push(req.body);
+    fs.writeFileSync("./Database/data.json", JSON.stringify(data, null, 2));
     res.status(201);
-    res.write(req.body);
+    res.send("register successfully...");
   } catch (error) {
     throw new Error(error);
   }
