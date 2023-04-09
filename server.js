@@ -45,7 +45,7 @@ app.get("/user/:id", async (req, res) => {
 app.post("/post", async (req, res) => {
   try {
     res.status(201);
-    res.send(req.body);
+    res.write(req.body);
   } catch (error) {
     throw new Error(error);
   }
