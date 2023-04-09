@@ -57,7 +57,7 @@ app.post("/post", async (req, res) => {
     data.data.push(req.body);
     fs.writeFileSync("./Database/data.json", JSON.stringify(data, null, 2));
     res.status(201);
-    res.send(`send successfully...${data}`);
+    res.send(`send successfully...${JSON.stringify(data)}`);
   } catch (error) {
     throw new Error(error);
   }
