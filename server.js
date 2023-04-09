@@ -53,7 +53,7 @@ app.get("/user/:id", async (req, res) => {
 app.post("/post", async (req, res) => {
   try {
     const file = fs.readFileSync("./Database/data.json");
-    const data = JSON.parse(file);
+    const data = await JSON.parse(file);
     data.data.push(req.body);
     fs.writeFileSync("./Database/data.json", JSON.stringify(data, null, 2));
     res.status(201);
