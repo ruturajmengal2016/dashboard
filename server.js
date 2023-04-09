@@ -6,7 +6,8 @@ const app = express();
 app.use(express.json());
 app.use((req, res, next) => {
   res.header({
-    "Access-Control-Allow-Origin": "https://nobelium-dashboard.onrender.com",
+    "Access-Control-Allow-Origin": "https://nobelium-dashboard.onrender.com", 
+    "Access-Control-Allow-Origin": "*", 
   });
   next();
 });
@@ -50,7 +51,7 @@ app.post("/post", async (req, res) => {
     data.data.push(req.body);
     fs.writeFileSync("./Database/data.json", JSON.stringify(data, null, 2));
     res.status(201);
-    res.send("register successfully...");
+    res.end()
   } catch (error) {
     throw new Error(error);
   }
