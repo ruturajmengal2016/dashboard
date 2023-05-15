@@ -1,15 +1,12 @@
 require("dotenv").config();
 const express = require("express");
-const fs = require("fs");
 const XLSX = require("xlsx");
-const connection = require("./Config/connection");
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use((req, res, next) => {
   res.header({
     "Access-Control-Allow-Origin": "https://nobelium-dashboard.onrender.com",
-    "Access-Control-Allow-Origin": "*",
   });
   next();
 });
@@ -27,15 +24,6 @@ for (let value of data) {
     Mob: value["Mobile No."],
   });
 }
-
-app.get("/users", (req, res) => {
-  connection.query(`select * from users`, (error, result) => {
-    if (error) {
-      res.send(error);
-    }
-    res.send("get successfuuly");
-  });
-});
 
 app.get("/data", (req, res) => {
   res.send(profile_data);
@@ -55,31 +43,9 @@ app.get("/user/:id", async (req, res) => {
   }
 });
 
-app.post("/post", async (req, res) => {
-  try {
-    connection.query(
-      `insert into users values (?,?,?)`,
-      [req.body.id, req.body.name, req.body.email],
-      (error, result) => {
-        if (error) {
-          console.log(error)
-        }
-       console.log("ok")
-      }
-    );
-    res.status(201)
-    res.send(`send successfully...`);
-  } catch (error) {
-    console.log(error)
+app.listen(process.env.PORT, (error) => {
+  if (error) {
+    console.log(error);
   }
-});
-
-app.listen(process.env.PORT, () => {
-  connection.connect((error) => {
-    if (error) {
-      console.error(error);
-    }
-    console.log("connected...");
-  });
   console.log("server listening...");
 });
