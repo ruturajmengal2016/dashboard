@@ -39,6 +39,7 @@ app.get("/user/:id", async (req, res) => {
       }
     }
     res.send(userProfile);
+    res.end();
   } catch (error) {
     throw new Error("User not Found");
   }
