@@ -10,6 +10,7 @@ app.use((req, res, next) => {
   });
   next();
 });
+
 const workbook = XLSX.readFile("./Excel/Nobelium - Leaderboard.xlsx");
 
 const worksheet = workbook.Sheets["Sheet1"];
